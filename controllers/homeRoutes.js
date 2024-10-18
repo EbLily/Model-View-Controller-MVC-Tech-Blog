@@ -14,21 +14,24 @@ router.get('/', async (req, res) => {
       ],
     });
 
-    //console.log(" Data: ", techData);
+  //  console.log(" Data: ", techData);
     // Serialize data so the template can read it
     const techs = techData.map((tech) => tech.get({ plain: true }));
-    console.log("Tech Data: ", techs)
+  //  console.log("Tech Data: ", techs)
     // Pass serialized data and session flag into template
     res.render('homepage', { 
       techs, 
       logged_in: req.session.logged_in 
     });
   } catch (err) {
-    res.status(500).json(err);
+    console.log("err: ", err)
+    res.status(500).json(err.messages);
   }
 });
 
 router.get('/tech/:id', async (req, res) => {
+  console.log("Incoming : ", req.params)
+  
   try {
     const techData = await Tech.findByPk(req.params.id, {
       include: [
