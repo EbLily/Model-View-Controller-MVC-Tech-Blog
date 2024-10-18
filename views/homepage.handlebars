@@ -1,0 +1,16 @@
+<!-- Loop over each object in the projects array -->
+<h2>Homepage View</h2>
+{{#each techs as |tech| }}
+<div class="row mb-4 project">
+  <div class="col-md-5">
+    <h3>{{tech.title}}</h3>
+    </p>
+  </div>
+  <div class="col-md-7">
+    <p>
+      {{tech.content}}
+    </p>
+  </div>
+</div>
+{{/each}}
+
