@@ -31,7 +31,7 @@ router.delete('/:id', withAuth, async (req, res) => {
       return;
     }
 
-    res.status(200).json(techtData);
+    res.status(200).json(techData);
   } catch (err) {
     res.status(500).json(err);
   }
