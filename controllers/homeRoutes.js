@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Tech, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
+const helpers = require('../utils/helpers');
 
 router.get('/', async (req, res) => {
   try {
@@ -9,6 +10,7 @@ router.get('/', async (req, res) => {
       include: [
         {
           model: User,
+          as: 'user',
           attributes: ['name'],
         },
       ],
