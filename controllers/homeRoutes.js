@@ -32,19 +32,25 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/tech/:id', async (req, res) => {
-  console.log("Incoming : ", req.params)
-  
   try {
     const techData = await Tech.findByPk(req.params.id, {
       include: [
         {
           model: User,
+          as: 'user',
           attributes: ['name'],
         },
       ],
     });
 
+    if (!techData) {
+      res.status(404).render('404', { message: 'Blog post not found', logged_in: req.session.logged_in });
+      return;
+    }
+
     const tech = techData.get({ plain: true });
+
+    tech.date = helpers.format_date(tech.date_created);
 
     res.render('tech', {
       ...tech,
@@ -63,13 +69,14 @@ router.get('/dashboard',  withAuth,  async (req, res) => {
     
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
-      // include: [{ model: Project }],
+      include: [{ model: Tech, as: 'techs' }],
     });
 
     const user = userData.get({ plain: true });
-    console.log("user: ", user)
+   
     res.render('profile', {
       ...user,
+      techs: user.techs,
       logged_in: true
     });
   } catch (err) {
