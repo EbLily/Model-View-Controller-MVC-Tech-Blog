@@ -1,44 +1,59 @@
-<div class="row">
-  <div class="col-auto">
+<div class='row'>
+  <div class='col-auto'>
     <h2>Welcome, {{name}}!</h2>
   </div>
 </div>
 
-<div class="row mt-4">
-  <div class="col-md-6">
+<div class='row mt-4'>
+  <div class='col-md-6'>
     <h3>Create a New Blog:</h3>
 
-    <form class="form new-blog-form">
-      <div class="form-group">
-        <label for="title">Blog Title:</label>
-        <input class="form-input" type="text" id="title" name="title" />
+    <form class='form new-blog-form'>
+      <input type='hidden' id='blog-id' name='blog-id' value='' />
+
+      <div class='form-group'>
+        <label for='title'>Blog Title:</label>
+        <input class='form-input' type='text' id='title' name='title' />
       </div>
-      <div class="form-group">
-        <label for="content">Content:</label>
-        <input class="form-input" type="text" id="content" name="content" />
+      <div class='form-group'>
+        <label for='content'>Content:</label>
+        <input class='form-input' type='text' id='content' name='content' />
       </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary">Create</button>
+      <div class='form-group'>
+        <button
+          type='submit'
+          class='btn btn-primary'
+          id='submit-btn'
+        >Create</button>
       </div>
     </form>
   </div>
 
-   {{#if techs.length}}
-  <div class="col-md-6 blog-list">
-    <h3>Your Blog Posts:</h3>
+  {{#if techs.length}}
+    <div class='col-md-6 blog-list'>
+      <h3>Your Blog Posts:</h3>
 
-    {{#each techs as |tech|}}
-    <div class="row mb-2">
-      <div class="col-md-8">
-        <h4><a href="/tech/{{tech.id}}">{{tech.title}}</a></h4>
-      </div>
-      <div class="col-md-4">
-        <button class="btn btn-sm btn-danger" data-id="{{tech.id}}">DELETE</button>
-      </div>
+      {{#each techs as |tech|}}
+        <div class='row mb-2'>
+          <div class='col-md-8'>
+            <h4><a href='/tech/{{tech.id}}'>{{tech.title}}</a></h4>
+          </div>
+          <div class='col-md-4'>
+            <button
+              class='btn btn-sm btn-danger'
+              data-id='{{tech.id}}'
+            >DELETE</button>
+            <button
+              class='btn btn-sm btn-info edit-btn'
+              data-id='{{tech.id}}'
+              data-title='{{tech.title}}'
+              data-content='{{tech.content}}'
+            >EDIT</button>
+          </div>
+        </div>
+      {{/each}}
     </div>
-    {{/each}}
-  </div>
   {{/if}}
 </div>
 
-<script src="./js/profile.js"></script>
+<script src='./js/profile.js'></script>

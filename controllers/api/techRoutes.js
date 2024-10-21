@@ -37,6 +37,32 @@ router.delete('/:id', withAuth, async (req, res) => {
   }
 });
 
+router.put('/:id', withAuth, async (req, res) => {
+  try {
+    const updatedTech = await Tech.update(
+      {
+        title: req.body.title,
+        content: req.body.content,
+      },
+      {
+        where: {
+          id: req.params.id,
+          user_id: req.session.user_id,
+        },
+      }
+    );
+
+    if (!updatedTech[0]) {
+      res.status(404).json({ message: 'No tech found with this id!' });
+      return;
+    }
+
+    res.status(200).json(updatedTech);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 router.post('/comment', (req, res) => {
   console.log("incoming data: ", req.body);
   // We need to Create a nEW Comment 
