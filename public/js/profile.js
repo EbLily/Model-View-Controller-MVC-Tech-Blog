@@ -22,7 +22,6 @@ const newFormHandler = async (event) => {
     }
   }
 };
-/*
 const delButtonHandler = async (event) => {
   if (event.target.hasAttribute('data-id')) {
     const id = event.target.getAttribute('data-id');
@@ -34,16 +33,15 @@ const delButtonHandler = async (event) => {
     if (response.ok) {
       document.location.replace('/profile');
     } else {
-      alert('Failed to delete tech');
+      alert('Failed to delete blog post');
     }
   }
 };
-*/
+
 document
   .querySelector('.new-blog-form')
   .addEventListener('submit', newFormHandler);
-/*
+
 document
-  .querySelector('.tech-list')
+  .querySelector('.blog-list')
   .addEventListener('click', delButtonHandler);
-*/

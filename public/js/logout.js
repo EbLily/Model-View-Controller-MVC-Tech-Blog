@@ -5,9 +5,12 @@ const logout = async () => {
   });
 
   if (response.ok) {
+    const data = await response.json();
+    alert(data.message);
     document.location.replace('/');
   } else {
-    alert(response.statusText);
+    const data = await response.json();
+    alert(data.message || 'Failed to log out. Please try again.');
   }
 };
 

@@ -1,23 +1,28 @@
 const loginFormHandler = async (event) => {
   event.preventDefault();
 
-  // Collect values from the login form
   const email = document.querySelector('#email-login').value.trim();
   const password = document.querySelector('#password-login').value.trim();
 
   if (email && password) {
-    // Send a POST request to the API endpoint
-    const response = await fetch('/api/users/login', {
-      method: 'POST',
-      body: JSON.stringify({ email, password }),
-      headers: { 'Content-Type': 'application/json' },
-    });
+    try {
+      const response = await fetch('/api/users/login', {
+        method: 'POST',
+        body: JSON.stringify({ email, password }),
+        headers: { 'Content-Type': 'application/json' },
+      });
 
-    if (response.ok) {
-      // If successful, redirect the browser to the profile page
-      document.location.replace('/');
-    } else {
-      alert(response.statusText);
+      const data = await response.json();
+
+      if (response.ok) {
+        alert(data.message);
+        document.location.replace('/');
+      } else {
+        alert(data.message || 'Failed to log in. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred. Please try again.');
     }
   }
 };
@@ -30,16 +35,28 @@ const signupFormHandler = async (event) => {
   const password = document.querySelector('#password-signup').value.trim();
 
   if (name && email && password) {
-    const response = await fetch('/api/users', {
-      method: 'POST',
-      body: JSON.stringify({ name, email, password }),
-      headers: { 'Content-Type': 'application/json' },
-    });
+    try {
+      const response = await fetch('/api/users', {
+        method: 'POST',
+        body: JSON.stringify({ name, email, password }),
+        headers: { 'Content-Type': 'application/json' },
+      });
 
-    if (response.ok) {
-      document.location.replace('/');
-    } else {
-      alert(response.statusText);
+      const data = await response.json();
+
+      if (response.ok) {
+        alert(data.message);
+        document.location.replace('/');
+      } else {
+        if (data.errors) {
+          alert(data.errors.join('\n'));
+        } else {
+          alert(data.message || 'Failed to sign up. Please try again.');
+        }
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred. Please try again.');
     }
   }
 };
