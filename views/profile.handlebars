@@ -23,7 +23,22 @@
     </form>
   </div>
 
- 
+   {{#if techs.length}}
+  <div class="col-md-6 blog-list">
+    <h3>Your Blog Posts:</h3>
+
+    {{#each techs as |tech|}}
+    <div class="row mb-2">
+      <div class="col-md-8">
+        <h4><a href="/tech/{{tech.id}}">{{tech.title}}</a></h4>
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-sm btn-danger" data-id="{{tech.id}}">DELETE</button>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+  {{/if}}
 </div>
 
 <script src="./js/profile.js"></script>
