@@ -1,15 +1,15 @@
-const commmentInput = documet.getElementById('comment');
-const titleInput = documet.getElementById('title');
-const commmentForm = documet.querySelector('comment-form');
+const commentInput = document.getElementById('comment');
+const titleInput = document.getElementById('title');
+const commentForm = document.querySelector('#comment-form');
 
 
 function createComment(event) {
     event.preventDefault();
 
-    let comment = commmentInput.value;
+    let comment = commentInput.value;
     console.log(comment);
     if(comment && title)  {
-        fetch('/api/tech/comment', { 
+        fetch('/api/techs/comment', { 
             method: 'POST', 
             body: JSON.stringify({ title, comment } )
         })
@@ -23,4 +23,4 @@ function createComment(event) {
 }
 
 
-commmentForm.addEventListener('submit', createComment);
+commentForm.addEventListener('submit', createComment);

@@ -66,8 +66,11 @@ router.put('/:id', withAuth, async (req, res) => {
 router.post('/comment', (req, res) => {
   console.log("incoming data: ", req.body);
   // We need to Create a nEW Comment 
+
+
   
   // We need to Associate the NEW COMMENT with the CURRENT THOUGHT/POST
+
 })
 
 module.exports = router;
