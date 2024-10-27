@@ -71,6 +71,7 @@ Visit the homepage, "Login" or "Sign Up" for an account if you don't already hav
 7- Account Log out: click on "logout" in the navigation menu.
 
 ## Deployed Application Link:
+[Deployed APP](https://model-view-controller-mvc-tech-blog-ans0.onrender.com)
 
 ## ScreenShots:
 ![screenshots of my website](./assets/Tech-Blog.PNG)
